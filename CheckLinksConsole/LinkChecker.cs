@@ -4,6 +4,9 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using Microsoft.Extensions.Logging;
+using Serilog.Debugging;
+using Serilog.Sinks;
 
 namespace CheckLinksConsole
 {
@@ -11,10 +14,18 @@ namespace CheckLinksConsole
     {
         public static IEnumerable<string> GetLinks(string page)
         {
+            string[] args = {""};
+            Config config = new Config(args);
+            string filePath = config.Output.GetReportFilePath();
             HtmlDocument htmlDocument = new HtmlDocument();
             htmlDocument.LoadHtml(page);
-            var links = htmlDocument.DocumentNode.SelectNodes("//a[@href]")
+            var originalLinks = htmlDocument.DocumentNode.SelectNodes("//a[@href]")
                 .Select(n => n.GetAttributeValue("href", string.Empty))
+                .ToList();
+
+            var log = Logs.CreateLogger(filePath);
+            originalLinks.ForEach(l => log.Debug(l));
+            var links = originalLinks
                 .Where(l => !String.IsNullOrEmpty(1.ToString()))
                 .Where(l => l.StartsWith("http"));
             return links;

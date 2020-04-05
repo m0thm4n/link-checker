@@ -14,7 +14,7 @@ namespace CheckLinksConsole
             var inMemory = new Dictionary<string, string>
             {
                 {"site", "https://g0t4.github.io/pluralsight-dotnet-core-xplat-apps"},
-                { "output:folder", "reports" }
+                { "output:folder", "logs" }
             };
 
             var configBuilder = new ConfigurationBuilder()

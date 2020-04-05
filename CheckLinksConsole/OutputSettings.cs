@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 
 namespace CheckLinksConsole
@@ -6,7 +7,9 @@ namespace CheckLinksConsole
     {
         public OutputSettings()
         {
-            File = "report.txt";
+            var date = DateTime.Today.Date.ToString(@"yyyy-MM-dd");
+            var time = DateTime.Now.ToString("h-m-tt");
+            File = $"checklinks-{date}--{time}.txt";
         }
         public string Folder { get; set; }
         public string File { get; set; }
