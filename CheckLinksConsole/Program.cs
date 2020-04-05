@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Linq;
+using Microsoft.Extensions.Configuration;
 
 namespace CheckLinksConsole
 {
@@ -10,17 +11,21 @@ namespace CheckLinksConsole
     {
         static void Main(string[] args)
         {
-            var currentDirectory = Directory.GetCurrentDirectory();
-            var outputFolder = "reports";
-            var outputFile = "report.txt";
-            var outputPath = Path.Combine(currentDirectory, outputFolder, outputFile);
+            var config = new Config(args);
+            /*var currentDirectory = Directory.GetCurrentDirectory();
+            var outputFolder = OutputSettings.Folder;
+            var outputFile = OutputSettings.File;*/
+            var site = config.Site;
+            var output = config.Output;
+            var outputPath = output.GetReportFilePath();
             System.Console.WriteLine(outputPath);
-            var directory = Path.GetDirectoryName(outputPath);
-            System.Console.WriteLine(directory);
-            Directory.CreateDirectory(directory);
+            var directory = config.Output.GetReportDirectory();
+            if (!String.IsNullOrEmpty(directory))
+            {
+                Directory.CreateDirectory(output.GetReportDirectory());    
+            }
             System.Console.WriteLine($"Saving report to {outputPath}");
-            // string site = "https://g0t4.github.io/pluralsight-dotnet-core-xplat-apps";
-            // string site = args[0];
+
             HttpClient client = new HttpClient();
             var body = client.GetStringAsync(site);
             Console.WriteLine(body.Result);
@@ -29,15 +34,13 @@ namespace CheckLinksConsole
             var links = LinkChecker.GetLinks(body.Result);
             links.ToList().ForEach(Console.WriteLine);
             // write out links
-            // File.WriteAllLinesAsync(outputPath, links);
-
             var checkedLinks = LinkChecker.CheckLinks(links);
             using (var file = File.CreateText(outputPath))
             {
                 foreach (var link in checkedLinks.OrderBy(l => l.Exists))
                 {
                     var status = link.IsMissing ? "missing" : "OK";
-                    file.WriteLineAsync($"{status} - {link.Link}");
+                    file.WriteLine($"{status} - {link.Link}");
                 }
             }
         }
