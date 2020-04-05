@@ -19,7 +19,7 @@ namespace CheckLinksConsole
             System.Console.WriteLine(directory);
             Directory.CreateDirectory(directory);
             System.Console.WriteLine($"Saving report to {outputPath}");
-            string site = "https://g0t4.github.io/pluralsight-dotnet-core-xplat-apps";
+            // string site = "https://g0t4.github.io/pluralsight-dotnet-core-xplat-apps";
             // string site = args[0];
             HttpClient client = new HttpClient();
             var body = client.GetStringAsync(site);
@@ -29,7 +29,17 @@ namespace CheckLinksConsole
             var links = LinkChecker.GetLinks(body.Result);
             links.ToList().ForEach(Console.WriteLine);
             // write out links
-            File.WriteAllLinesAsync(outputPath, links);
+            // File.WriteAllLinesAsync(outputPath, links);
+
+            var checkedLinks = LinkChecker.CheckLinks(links);
+            using (var file = File.CreateText(outputPath))
+            {
+                foreach (var link in checkedLinks.OrderBy(l => l.Exists))
+                {
+                    var status = link.IsMissing ? "missing" : "OK";
+                    file.WriteLineAsync($"{status} - {link.Link}");
+                }
+            }
         }
     }
 }
