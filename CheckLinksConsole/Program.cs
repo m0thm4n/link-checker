@@ -21,18 +21,18 @@ namespace CheckLinksConsole
             log.Information(body.Result);
 
             var links = LinkChecker.GetLinks(body.Result);
-            return;
             var checkedLinks = LinkChecker.CheckLinks(links);
             using (var file = File.CreateText(config.Output.GetReportDirectory()))
-	    using (var linksDb = new LinksDb())
-	    {
+            using (var linksDb = new LinksDb())
+            {
                 foreach (var link in checkedLinks.OrderBy(l => l.Exists))
                 {
                     var status = link.IsMissing ? "missing" : "OK";
                     file.WriteLine($"{status} - {link.Link}");
-		    linksDb.Links.Add(link);
+		            linksDb.Links.Add(link);
                 }
-		linksDb.SaveChanges();
+		        linksDb.SaveChanges();
+                log.Information("Wrote to DB");
             }
         }
     }

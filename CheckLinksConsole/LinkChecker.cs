@@ -7,6 +7,8 @@ using System.Net.Http;
 using Microsoft.Extensions.Logging;
 using Serilog.Debugging;
 using Serilog.Sinks;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Connections.Abstractions;
 
 namespace CheckLinksConsole
 {
@@ -64,10 +66,11 @@ namespace CheckLinksConsole
 
 public class LinkCheckResult
 {
+    [Column("ID")]
     public int Id { get; set; }
     public bool Exists => String.IsNullOrWhiteSpace(Problem);
     public bool IsMissing => !Exists;
     public string Problem { get; set; }
     public string Link { get; set; }
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime CheckedAt { get; set; } = DateTime.UtcNow;
 }
