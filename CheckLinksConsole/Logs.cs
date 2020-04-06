@@ -8,7 +8,7 @@ namespace CheckLinksConsole
         public static Logger CreateLogger(string filePath)
         {
             var log = new LoggerConfiguration()
-                .MinimumLevel.Debug()
+                .MinimumLevel.Information()
                 .WriteTo.Console()
                 .WriteTo.Trace()
                 .WriteTo.Debug()
