@@ -1,5 +1,3 @@
-using Serilog;
-using Serilog.Core;
 using Microsoft.EntityFrameworkCore;
 
 namespace CheckLinksConsole
