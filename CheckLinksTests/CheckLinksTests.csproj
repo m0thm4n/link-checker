@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CheckLinksConsole\CheckLinks.csproj" />
+    <ProjectReference Include="..\CheckLinksConsole\CheckLinksConsole.csproj" />
   </ItemGroup>
 
 </Project>

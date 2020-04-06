@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29920.165
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckLinks", "CheckLinksConsole\CheckLinks.csproj", "{ADAB69A5-0D1B-41C9-85CF-D0811C1A6D5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CheckLinksConsole", "CheckLinksConsole\CheckLinksConsole.csproj", "{ADAB69A5-0D1B-41C9-85CF-D0811C1A6D5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckLinksTests", "CheckLinksTests\CheckLinksTests.csproj", "{B8D5A561-A787-4270-8C85-18AFC6489053}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CheckLinksTests", "CheckLinksTests\CheckLinksTests.csproj", "{B8D5A561-A787-4270-8C85-18AFC6489053}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{ADAB69A5-0D1B-41C9-85CF-D0811C1A6D5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -44,5 +41,11 @@ Global
 		{B8D5A561-A787-4270-8C85-18AFC6489053}.Release|x64.Build.0 = Release|Any CPU
 		{B8D5A561-A787-4270-8C85-18AFC6489053}.Release|x86.ActiveCfg = Release|Any CPU
 		{B8D5A561-A787-4270-8C85-18AFC6489053}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C99596A9-0036-411B-80F3-8E441B52D221}
 	EndGlobalSection
 EndGlobal

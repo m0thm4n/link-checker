@@ -8,7 +8,6 @@ using Microsoft.Extensions.Logging;
 using Serilog.Debugging;
 using Serilog.Sinks;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.AspNetCore.Connections.Abstractions;
 
 namespace CheckLinksConsole
 {
